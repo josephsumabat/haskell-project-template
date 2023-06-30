@@ -1,0 +1,64 @@
+spec-version: 0.30.0
+name: haskell-project-template
+author: Joseph Sumabat
+synopsis: See README on Github for more information 
+description: A personal template for haskell projects
+category: Development
+maintainer: josephrsumabat@gmail.com
+github: josephsumabat/haskell-project-template
+license: MIT
+version: 0.1.0
+build-type: Simple
+extra-source-files:
+  - CHANGELOG.md
+  - README.md
+
+dependencies:
+  - aeson
+
+default-extensions:
+- FlexibleContexts
+- OverloadedRecordDot
+- OverloadedStrings
+- NoFieldSelectors
+- LambdaCase
+
+ghc-options:
+  - -Wall
+
+library:
+  source-dirs: src
+  ghc-options:
+  - -fwrite-ide-info
+  - -hiedir test/TestData/.hiefiles
+
+executable:
+  source-dirs: app
+  main: Main.hs
+  dependencies:
+  - haskell-project-template
+
+tests:
+  haskell-project-template-test:
+    dependencies:
+    - haskell-project-template
+    defaults: hspec/hspec@main
+    ghc-options:
+      - -fwrite-ide-info
+      - -hiedir test/TestData/.hiefiles
+
+flags:
+  dev:
+    description: Defer type errors for development
+    manual: true
+    default: false
+
+when:
+  - condition: flag(dev)
+    ghc-options:
+    - -fwrite-ide-info
+    - -hiedir .hiefiles
+    - -fdefer-type-errors
+    - -fno-defer-typed-holes
+    - -Werror=deferred-type-errors
+    - -Werror=deferred-out-of-scope-variables
