@@ -45,6 +45,7 @@ library
   ghc-options: -Wall -fwrite-ide-info -hiedir test/TestData/.hiefiles
   build-depends:
       aeson
+    , base
   default-language: Haskell2010
   if flag(dev)
     ghc-options: -fwrite-ide-info -hiedir .hiefiles -fdefer-type-errors -fno-defer-typed-holes -Werror=deferred-type-errors -Werror=deferred-out-of-scope-variables
@@ -64,6 +65,7 @@ executable haskell-project-template
   ghc-options: -Wall
   build-depends:
       aeson
+    , base
     , haskell-project-template
   default-language: Haskell2010
   if flag(dev)
@@ -85,6 +87,7 @@ test-suite haskell-project-template-test
   ghc-options: -Wall -fwrite-ide-info -hiedir test/TestData/.hiefiles
   build-depends:
       aeson
+    , base
     , haskell-project-template
     , hspec ==2.*
   default-language: Haskell2010
